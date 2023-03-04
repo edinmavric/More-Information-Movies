@@ -7,7 +7,7 @@ const renderMovies = () => {
   const movieList = document.getElementById("movie-list");
 
   if (movies.length === 0) {
-    movieList.classList.remove('visible');
+    movieList.classList.remove("visible");
     return;
   } else {
     movieList.classList.add("visible");
@@ -15,8 +15,15 @@ const renderMovies = () => {
   movieList.innerHTML = "";
 
   movies.forEach((movie) => {
-    const movieEl = document.createElement('li');
+    const movieEl = document.createElement("li");
     movieEl.textContent = movie.info.title;
+    let text = movie.info.title + " - ";
+    for (const key in movie.info) {
+      if (key !== "title") {
+        text = text + `${key}: ${movie.info[key]}`;
+      }
+    }
+    movieEl.textContent = text;
     movieList.append(movieEl);
   });
 };
