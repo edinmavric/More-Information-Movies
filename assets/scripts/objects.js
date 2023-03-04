@@ -20,10 +20,15 @@ const renderMovies = (filter = "") => {
 
   filteredMovies.forEach((movie) => {
     const movieEl = document.createElement("li");
+    // if (!('info' in movie)) {
+    //   // (movie.info === undefined) another way
+    //   // checking if key is in object (this case if key's not in object)
+    // }
     const { info, ...otherProps } = movie;
     console.log(otherProps);
-    const { title: movieTitle } = info;
-    let text = movieTitle + " - ";
+    // const { title: movieTitle } = info;
+    // const { getFormatedTitle } = movie;
+    let text = movie.getFormatedTitle() + " - ";
     for (const key in info) {
       if (key !== "title") {
         text = text + `${key}: ${info[key]}`;
@@ -53,6 +58,9 @@ const addMovieHandler = () => {
       [extraName]: extraValue,
     },
     id: Math.random(),
+    getFormatedTitle: function () {
+      return this.info.title.toUpperCase();
+    }
   };
 
   movies.push(newMovie);
